@@ -1,3 +1,61 @@
+* {
+    box-sizing: border-box;
+}
+
 .hidden {
     visibility: hidden;
+}
+
+section {
+    display: flex;
+    justify-content: space-around;
+}
+
+#next-round {
+    display: flex;
+    align-items: center;
+}
+
+#attack {
+    display: flex;
+    background-color: red;
+    color: white;
+    padding: 6px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 10px;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    box-shadow: 0 5px #999;
+}
+
+#attack:hover {
+    background-color: #bf070e;
+}
+
+#attack:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(5px);
+}
+
+#heal {
+    display: flex;
+    background-color: rgb(44, 208, 44);
+    color: white;
+    padding: 6px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 10px;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    box-shadow: 0 5px #999;
+}
+
+#heal:hover {
+    background-color: rgb(69, 150, 69);
+}
+
+#heal:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(5px);
 }

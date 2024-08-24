@@ -4,6 +4,8 @@ let round = 1
 let maxRound = 3
 let gameOver = false;
 let timer;
+let enemy;
+let playerTurn = true;
 
 const playerStat = {
     playerAtk: 0,
@@ -52,8 +54,9 @@ function runGame() {
 
 function checkGameOver() {
     if (playerStat.playerHealth <= 0) {
+        playerStat.playerHealth = 0
         gameOver = true
-        render()
+        render() 
     }
 }
 
@@ -64,55 +67,99 @@ function render() {
     if(gameOver === true) {
         lossMsgEl.classList.remove('hidden')
         retryBtnEl.classList.remove('hidden')
+        return
     }
     if(enemyStat.enemyHealth === 0) {
         roundBtnEl.classList.remove('hidden')
     }
+    if (round === maxRound && enemyStat.enemyHealth === 0) {
+        winMsgEL.classList.remove('hidden')
+        retryBtnEl.classList.remove('hidden')
+        if(round === 3) {
+            roundBtnEl.classList.add('hidden')
+        }
+    }
+    checkGameOver()
 }
 
 function updateStat() {
-    enemyStat.enemyAtk += Math.floor(Math.random() * 4)
-    
-    // if(enemyStat.enemyHealth <= 0) {
-        //     roundBtnEl.classList.remove('hidden')
-        // }
-        
+    enemyStat.enemyAtk += Math.floor(Math.random() * 4) + 1
         if (roundEl === 2) {
-            enemyStat.enemyAtk += Math.floor(Math.random() * 6)
+            enemyStat.enemyAtk += Math.floor(Math.random() * 6) + 1
             playerStat.playerHealth = 15
             enemyStat.enemyHealth = 15
         }
         
         if (roundEl === 3) {
-            enemyStat.enemyAtk += Math.floor(Math.random() * 8)
+            enemyStat.enemyAtk += Math.floor(Math.random() * 8) + 1
             playerStat.playerHealth = 20
             playerStat.playerHealth = 20
         }
+        checkGameOver()
 }
 
 function atkBtnClick() {
-    enemyStat.enemyHealth -= Math.floor(Math.random() * 4)
-
+    enemyStat.enemyHealth -= Math.floor(Math.random() * 4) + 1
+    if (enemyStat.enemyHealth < 0) {
+        enemyStat.enemyHealth = 0
+        return
+    }
+    if (playerStat.playerHealth < 0) {
+        playerStat.playerHealth = 0
+        return
+    }
     if(roundEl === 2) {
-        enemyStat.enemyHealth -= Math.floor(Math.random() * 6)
+        enemyStat.enemyHealth -= Math.floor(Math.random() * 6) + 1
     }
     if(roundEl === 3) {
-        enemyStat.enemyHealth -= Math.floor(Math.random() * 8)
+        enemyStat.enemyHealth -= Math.floor(Math.random() * 8) + 1
     }
     render()
+    checkPlayerTurn()
 }
 
 function healBtnClick() {
-    playerStat.playerHealth += Math.floor(Math.random() * 4)
-
+    playerStat.playerHealth += Math.floor(Math.random() * 4) + 2
+    if(playerStat.playerHealth > 10) {
+        playerStat.playerHealth = 10
+    }
     if (round === 2) {
-        playerStat.playerHealth += Math.floor(Math.random() * 6)
+        playerStat.playerHealth += Math.floor(Math.random() * 6) + 2
+        if(playerStat.playerHealth > 15) {
+            playerStat.playerHealth = 15
+        }
     }
     if (round === 3) {
-        playerStat.playerHealth += Math.floor(Math.random() * 8)
+        playerStat.playerHealth += Math.floor(Math.random() * 8) + 2
+        if(playerStat.playerHealth > 20) {
+            playerStat.playerHealth = 20
+        }
     }
     render()
+    checkPlayerTurn()
 }
+
+function enemyTurn() {
+    playerStat.playerHealth -= Math.floor(Math.random() * 4) + 1
+    checkPlayerTurn()
+}
+
+function checkPlayerTurn() {
+    if(gameOver === true || enemyStat.enemyHealth === 0) return
+    if(playerTurn === true) {
+        playerTurn = false
+        atkBtnEl.disabled = true
+        setTimeout(() => {
+            enemyTurn()
+            render()
+        },2000 )
+    } else {
+        playerTurn = true
+        atkBtnEl.disabled = false
+    }
+}
+
+
 
 function retryClick() {
     playerStat.playerHealth = 10
@@ -129,10 +176,6 @@ function nextRoundClick() {
     if(round === 3) {
         enemyStat.enemyHealth = 20
         playerStat.playerHealth = 20
-    }
-    if (round > maxRound) {
-        winMsgEL.classList.remove('hidden')
-        retryBtnEl.classList.remove('hidden')
     }
     init()
     updateStat()
