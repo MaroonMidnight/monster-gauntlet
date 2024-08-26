@@ -13,44 +13,62 @@
     </header>
     <main>
 
-        <!-- Game UI -->
-        <section id="player-buttons">
-            <button id="attack">Attack</button>
-            <button id="heal">Heal</button>
-        </section>
-        <button id="next-round" class="hidden">Next Round?</button>
         <!-- Game Data -->
-         
+        
+        
+        
+        <div class="top-dash">
+            <div class="round">
+            <p> Current Round:
+                <span id="current-round">...</span>
+            </p>
+            </div>
+
+            <div class="enemy">
+            <p>Enemy Health:
+                <span id="enemy-health-stat">...</span>
+            </p>
+
+            </div>
+        </div>
+        <!-- Game / Message Display -->
+        
+        
+        <div id="msg-box">
+            <div class="display"></div>
+        </div>
+        <div class="game-state-wrapper">
+            <h2 id="loss-msg" class="hidden">
+                You lose!
+            </h2>
+            <h2 id="win-msg" class="hidden">
+                You win!
+            </h2>
+        </div>
+        <div class="dashboard">
+            <button id="next-round" class="hidden">Next Round?</button>
+            <button id="restart" class="hidden">
+                Try again?
+            </button>
+        </div>
+        <div class="bottom-dash">
+        <div class="health">
         <p>Health:
             <span id="health-stat">...</span>
-         </p>
-
-        <p>Enemy Health:
-            <span id="enemy-health-stat">...</span>
         </p>
-
-         <!-- Game / Message Display -->
-
-         <p class="current-round">Current Round:
-            <span id="current-round">...</span>
-         </p>
-
-         <div id="msg-box">
-            <div class="display"></div>
-         </div>
-          
-        <h2 id="loss-msg" class="hidden">
-                You lose!
-        </h2>
-        
-        <h2 id="win-msg" class="hidden">
-            You win!
-         </h2>
-
-        <button id="restart" class="hidden">
-            Try again?
-        </button>
-
+        </div>
+        <div class="dialogue">
+            <p>
+                text here
+            </p>
+        </div>
+        </div>
     </main>
+    
+            <!-- Game UI -->
+            <section class="player-buttons">
+                <button id="attack">Attack</button>
+                <button id="heal">Heal</button>
+            </section>
 </body>
 </html>

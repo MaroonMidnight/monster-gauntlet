@@ -1,28 +1,49 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.hidden {
+/* .hidden {
     visibility: hidden;
+} */
+ 
+body {
+    height: 100%;
+    margin: 0;
 }
 
-section {
-    display: flex;
-    justify-content: space-around;
+h1 {
+    text-align: center;
 }
 
-#next-round {
+main {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    flex: 1;
+}
+
+.player-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    padding: 1rem;
+    background-color: grey;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 #attack {
-    display: flex;
     background-color: red;
     color: white;
-    padding: 6px;
-    font-size: 20px;
+
+    padding: 50px 0;
+    /* margin: 0 50px; */
+    font-size: 2rem;
     text-align: center;
+    width: 200px;
+
     border-radius: 10px;
     transition-duration: 0.5s;
     cursor: pointer;
@@ -39,13 +60,15 @@ section {
 }
 
 #heal {
-    display: flex;
     background-color: rgb(44, 208, 44);
     color: white;
-    padding: 6px;
-    font-size: 20px;
+
+    font-size: 2rem;
     text-align: center;
     border-radius: 10px;
+    width: 200px;
+    padding: 50px 0;
+
     transition-duration: 0.5s;
     cursor: pointer;
     box-shadow: 0 5px #999;
@@ -58,4 +81,48 @@ section {
 #heal:active {
     box-shadow: 0 5px #666;
     transform: translateY(5px);
+}
+
+.game-state-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#next-round {
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+    width: 250px;
+    height: 50px;
+    margin: 10px auto;
+}
+
+#restart {
+    border-radius: 5px;
+    width: 250px;
+    margin: 10px auto;
+    height: 50px;
+}
+
+.dashboard {
+    display: grid;
+}
+
+
+.top-dash {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.bottom-dash {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.enemy {
+    border: 2px solid black;
 }
