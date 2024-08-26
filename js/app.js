@@ -42,12 +42,10 @@ function init() {
     retryBtnEl.classList.add('hidden')
     roundBtnEl.classList.add('hidden')
     runGame()
-    updateStat()
 }
 
 function runGame() {
     checkGameOver()
-    updateStat()
     render()
     
 }
@@ -82,37 +80,35 @@ function render() {
     checkGameOver()
 }
 
-function updateStat() {
-    enemyStat.enemyAtk += Math.floor(Math.random() * 4) + 1
-        if (roundEl === 2) {
-            enemyStat.enemyAtk += Math.floor(Math.random() * 6) + 1
-            playerStat.playerHealth = 15
-            enemyStat.enemyHealth = 15
-        }
+// function updateStat() {
+//     enemyStat.enemyAtk += Math.floor(Math.random() * 4) + 1
+//         if (roundEl === 2) {
+//             enemyStat.enemyAtk += Math.floor(Math.random() * 6) + 1
+//             playerStat.playerHealth = 15
+//             enemyStat.enemyHealth = 15
+//         }
         
-        if (roundEl === 3) {
-            enemyStat.enemyAtk += Math.floor(Math.random() * 8) + 1
-            playerStat.playerHealth = 20
-            playerStat.playerHealth = 20
-        }
-        checkGameOver()
-}
+//         if (roundEl === 3) {
+//             enemyStat.enemyAtk += Math.floor(Math.random() * 8) + 1
+//             playerStat.playerHealth = 20
+//             playerStat.playerHealth = 20
+//         }
+//         checkGameOver()
+// }
 
 function atkBtnClick() {
-    enemyStat.enemyHealth -= Math.floor(Math.random() * 4) + 1
+    enemyStat.enemyHealth -= Math.floor(Math.random() * 3) + 1
     if (enemyStat.enemyHealth < 0) {
         enemyStat.enemyHealth = 0
-        return
     }
     if (playerStat.playerHealth < 0) {
         playerStat.playerHealth = 0
-        return
     }
     if(roundEl === 2) {
-        enemyStat.enemyHealth -= Math.floor(Math.random() * 6) + 1
+        enemyStat.enemyHealth -= Math.floor(Math.random() * 5) + 1
     }
     if(roundEl === 3) {
-        enemyStat.enemyHealth -= Math.floor(Math.random() * 8) + 1
+        enemyStat.enemyHealth -= Math.floor(Math.random() * 7) + 1
     }
     render()
     checkPlayerTurn()
@@ -139,16 +135,13 @@ function healBtnClick() {
     checkPlayerTurn()
 }
 
-function enemyTurn() {
-    playerStat.playerHealth -= Math.floor(Math.random() * 4) + 1
-    checkPlayerTurn()
-}
 
 function checkPlayerTurn() {
     if(gameOver === true || enemyStat.enemyHealth === 0) return
     if(playerTurn === true) {
         playerTurn = false
         atkBtnEl.disabled = true
+        healBtnEL.disabled = true
         setTimeout(() => {
             enemyTurn()
             render()
@@ -156,9 +149,25 @@ function checkPlayerTurn() {
     } else {
         playerTurn = true
         atkBtnEl.disabled = false
+        healBtnEL.disabled = false
     }
 }
 
+function enemyTurn() {
+    playerStat.playerHealth -= Math.floor(Math.random() * 3) + 1
+    if (roundEl === 2) {
+        enemyStat.enemyAtk += Math.floor(Math.random() * 5) + 1
+        playerStat.playerHealth = 15
+        enemyStat.enemyHealth = 15
+    }
+                
+    if (roundEl === 3) {
+        enemyStat.enemyAtk += Math.floor(Math.random() * 7) + 1
+        playerStat.playerHealth = 20
+        playerStat.playerHealth = 20
+    }
+    checkPlayerTurn()
+}
 
 
 function retryClick() {
@@ -178,7 +187,7 @@ function nextRoundClick() {
         playerStat.playerHealth = 20
     }
     init()
-    updateStat()
+    render()
 }
 
 init();
