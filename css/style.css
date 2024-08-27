@@ -1,20 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* .hidden {
+.hidden {
     visibility: hidden;
-} */
+}
  
 body {
+    font-family: "Pixelify Sans",system-ui,sans-serif;
     height: 100%;
     margin: 0;
+    background-color: #D3B683;
 }
 
 h1 {
     text-align: center;
+    font-size: 50px;
+    /* background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(210,14,74,1)
+    35%, rgba(255,59,0,1) 100%); */
+    /* -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
 }
 
 main {
@@ -35,7 +44,8 @@ main {
 }
 
 #attack {
-    background-color: red;
+    font-family: "Pixelify Sans",system-ui,sans-serif;
+    background-color: #B30000;
     color: white;
 
     padding: 50px 0;
@@ -51,7 +61,7 @@ main {
 }
 
 #attack:hover {
-    background-color: #bf070e;
+    background-color: #ed0910;
 }
 
 #attack:active {
@@ -60,7 +70,8 @@ main {
 }
 
 #heal {
-    background-color: rgb(44, 208, 44);
+    font-family: "Pixelify Sans",system-ui,sans-serif;
+    background-color: #156615;
     color: white;
 
     font-size: 2rem;
@@ -75,7 +86,7 @@ main {
 }
 
 #heal:hover {
-    background-color: rgb(69, 150, 69);
+    background-color: rgb(15, 213, 15);
 }
 
 #heal:active {
@@ -90,31 +101,64 @@ main {
     flex-direction: column;
 }
 
-#next-round {
-    background-color: blue;
+.round {
+    display: flex;
+    max-height: 30px;
+    border: 2px solid black;
+    border-radius: 5px;
     color: white;
+    background-color: blue;
+    background-image: linear-gradient(blue, rgb(82, 124, 192));
+    margin-top: 10px;
+    padding: 4px 5px;
+    max-height: 30px;
+}
+
+#next-round {
+    font-family: "Pixelify Sans",system-ui,sans-serif;
+    font-size: 25px;
+    background-color: #24AE24;
+    color: black;
     border-radius: 5px;
     width: 250px;
     height: 50px;
     margin: 10px auto;
 }
 
+#next-round:hover {
+    background-color: rgb(15,213,15);
+}
+
 #restart {
+    font-family: "Pixelify Sans",system-ui,sans-serif;
+    font-size: 25px;
+    color: white;
+    background-color: #B30000;
     border-radius: 5px;
     width: 250px;
     margin: 10px auto;
     height: 50px;
+}
+
+#restart:hover {
+    background-color: #ed0910;
 }
 
 .dashboard {
     display: grid;
 }
 
-
 .top-dash {
     display: flex;
     justify-content: space-between;
     margin: 20px;
+}
+
+.instructions {
+    text-align: center;
+    max-width: 500px;
+    /* max-height: 500px; */
+    /* margin-left: 80px; */
 }
 
 .bottom-dash {
@@ -124,5 +168,37 @@ main {
 }
 
 .enemy {
+    max-height: 250px;
     border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    background-color: rgb(163, 155, 155);
+    background-image: linear-gradient(rgb(80, 78, 78),rgb(148, 142, 142), rgb(226, 224, 224));
+}
+
+.health {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    background-color: rgb(20, 223, 40);
+    background-image: linear-gradient(rgb(34, 174, 34),rgb(50, 170, 50),rgb(50, 221, 50));
+}
+
+.dialogue {
+    border: 3px solid black;
+    border-radius: 5px;
+    width: 300px;
+    background-color: rgba(117, 114, 114, .5);
+}
+
+.dialogue-text {
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.enemy-pokemon {
+    display: flex;
+    justify-content: flex-end;
 }

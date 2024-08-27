@@ -30,12 +30,12 @@ const lossMsgEl = document.querySelector('#loss-msg')
 const winMsgEL = document.querySelector('#win-msg')
 const retryBtnEl = document.querySelector('#restart')
 const msgBoxEL = document.querySelector('#msg-box')
-const display = document.querySelector('.display')
+// const display = document.querySelector('.display')
+const dialogue = document.querySelector('.dialogue')
 
 // Functions
 
 function init() {
-    console.log('Running')
     gameOver = false;
     lossMsgEl.classList.add('hidden')
     winMsgEL.classList.add('hidden')
@@ -79,22 +79,6 @@ function render() {
     }
     checkGameOver()
 }
-
-// function updateStat() {
-//     enemyStat.enemyAtk += Math.floor(Math.random() * 4) + 1
-//         if (roundEl === 2) {
-//             enemyStat.enemyAtk += Math.floor(Math.random() * 6) + 1
-//             playerStat.playerHealth = 15
-//             enemyStat.enemyHealth = 15
-//         }
-        
-//         if (roundEl === 3) {
-//             enemyStat.enemyAtk += Math.floor(Math.random() * 8) + 1
-//             playerStat.playerHealth = 20
-//             playerStat.playerHealth = 20
-//         }
-//         checkGameOver()
-// }
 
 function atkBtnClick() {
     enemyStat.enemyHealth -= Math.floor(Math.random() * 3) + 1
@@ -173,6 +157,7 @@ function enemyTurn() {
 function retryClick() {
     playerStat.playerHealth = 10
     enemyStat.enemyHealth = 10
+    round = 1
     init()
 }
 
