@@ -32,6 +32,7 @@ const retryBtnEl = document.querySelector('#restart')
 const msgBoxEL = document.querySelector('#msg-box')
 // const display = document.querySelector('.display')
 const dialogue = document.querySelector('.dialogue')
+const gameWrapper = document.querySelector('.game-state-wrapper')
 
 // Functions
 
@@ -41,6 +42,7 @@ function init() {
     winMsgEL.classList.add('hidden')
     retryBtnEl.classList.add('hidden')
     roundBtnEl.classList.add('hidden')
+    gameWrapper.classList.add('hidden')
     runGame()
 }
 
@@ -65,6 +67,7 @@ function render() {
     if(gameOver === true) {
         lossMsgEl.classList.remove('hidden')
         retryBtnEl.classList.remove('hidden')
+        gameWrapper.classList.remove('hidden')
         return
     }
     if(enemyStat.enemyHealth === 0) {
@@ -73,6 +76,7 @@ function render() {
     if (round === maxRound && enemyStat.enemyHealth === 0) {
         winMsgEL.classList.remove('hidden')
         retryBtnEl.classList.remove('hidden')
+        gameWrapper.classList.remove('hidden')
         if(round === 3) {
             roundBtnEl.classList.add('hidden')
         }
@@ -81,7 +85,9 @@ function render() {
 }
 
 function atkBtnClick() {
-    enemyStat.enemyHealth -= Math.floor(Math.random() * 3) + 1
+    let r1damage = Math.floor(Math.random() * 3) + 1
+    enemyStat.enemyHealth -= r1damage
+    dialogue.innerHTML += `<p class='dialogue-text'>Player One did ${r1damage} damage!</p> `
     if (enemyStat.enemyHealth < 0) {
         enemyStat.enemyHealth = 0
     }
@@ -89,28 +95,38 @@ function atkBtnClick() {
         playerStat.playerHealth = 0
     }
     if(roundEl === 2) {
-        enemyStat.enemyHealth -= Math.floor(Math.random() * 5) + 1
+        let r2damage = Math.floor(Math.random() * 5) + 1
+    enemyStat.enemyHealth -= r2damage
+    dialogue.innerHTML += `<p class='dialogue-text'>Player One attacked PC, -${r2damage}xp</p> `
     }
     if(roundEl === 3) {
-        enemyStat.enemyHealth -= Math.floor(Math.random() * 7) + 1
+        let r3damage = Math.floor(Math.random() * 7) + 1
+    enemyStat.enemyHealth -= r3damage
+    dialogue.innerHTML += `<p class='dialogue-text'>Player One attacked PC, -${r3damage}xp</p> `
     }
     render()
     checkPlayerTurn()
 }
 
 function healBtnClick() {
-    playerStat.playerHealth += Math.floor(Math.random() * 4) + 2
+    let r1Heal = Math.floor(Math.random() * 4) + 2
+    playerStat.playerHealth += r1Heal
+    dialogue.innerHTML += `<p class='dialogue-text'>Player One restored ${r1Heal} health!</p> `
     if(playerStat.playerHealth > 10) {
         playerStat.playerHealth = 10
     }
     if (round === 2) {
-        playerStat.playerHealth += Math.floor(Math.random() * 6) + 2
+        let r2Heal = Math.floor(Math.random() * 6) + 2
+        playerStat.playerHealth += r2Heal
+        dialogue.innerHTML += `<p class='dialogue-text'>Player One restored ${r2Heal} health!</p> `
         if(playerStat.playerHealth > 15) {
             playerStat.playerHealth = 15
         }
     }
     if (round === 3) {
-        playerStat.playerHealth += Math.floor(Math.random() * 8) + 2
+        let r3Heal = Math.floor(Math.random() * 8) + 2
+        playerStat.playerHealth += r3Heal
+        dialogue.innerHTML += `<p class='dialogue-text'>Player One restored ${r3Heal} health!</p> `
         if(playerStat.playerHealth > 20) {
             playerStat.playerHealth = 20
         }
@@ -138,15 +154,21 @@ function checkPlayerTurn() {
 }
 
 function enemyTurn() {
-    playerStat.playerHealth -= Math.floor(Math.random() * 3) + 1
+    let r1EDamage = Math.floor(Math.random() * 3) + 1
+    playerStat.playerHealth -= r1EDamage
+    dialogue.innerHTML += `<p class='dialogue-text'>The Enemy did ${r1EDamage} damage!</p> `
     if (roundEl === 2) {
-        enemyStat.enemyAtk += Math.floor(Math.random() * 5) + 1
+        let r2EDamage = Math.floor(Math.random() * 5) + 1
+    playerStat.playerHealth -= r2EDamage
+    dialogue.innerHTML += `<p class='dialogue-text'>The Enemy did ${r2EDamage} damage!</p> `
         playerStat.playerHealth = 15
         enemyStat.enemyHealth = 15
     }
                 
     if (roundEl === 3) {
-        enemyStat.enemyAtk += Math.floor(Math.random() * 7) + 1
+        let r3EDamage = Math.floor(Math.random() * 7) + 1
+    playerStat.playerHealth -= r3EDamage
+    dialogue.innerHTML += `<p class='dialogue-text'>The Enemy did ${r3EDamage} damage!</p> `
         playerStat.playerHealth = 20
         playerStat.playerHealth = 20
     }
@@ -158,6 +180,7 @@ function retryClick() {
     playerStat.playerHealth = 10
     enemyStat.enemyHealth = 10
     round = 1
+    dialogue.innerHTML = ''
     init()
 }
 
@@ -171,6 +194,7 @@ function nextRoundClick() {
         enemyStat.enemyHealth = 20
         playerStat.playerHealth = 20
     }
+    dialogue.innerHTML = ''
     init()
     render()
 }
